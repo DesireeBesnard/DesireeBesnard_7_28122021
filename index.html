@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Font awesome Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
@@ -18,41 +21,37 @@
 <body>
 
     <header class="container">
-        <img src="assets/logo.png" alt="company logo">
-        <div class="row d-flex">
-            <input class="form-control mr-sm-2" type="search"
+        <div class="d-flex justify-content-center">
+            <img class="logo" src="assets/logo.png" alt="company logo">
+        </div>
+        <div class="row d-flex w-100 position-relative">
+            <input class="form-control text-dark search" type="search"
                 placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn border-0 position-absolute h-100 search-btn" type="submit"><span class="fas fa-search"></span></button>
         </div>
         <div class="row">
-            <div class="btn-group">
-                <button type="button" class="btn dropdown-toggle primary" data-toggle="dropdown" aria-expanded="false">Ingrédients</button>
+            <div class="btn-group rounded ingredients">
+                <button type="button" class="btn rounded dropdown-toggle text-white primary" data-toggle="dropdown" aria-expanded="false">Ingrédients</button>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="#">Action</a>
                   <a class="dropdown-item" href="#">Another action</a>
                   <a class="dropdown-item" href="#">Something else here</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Separated link</a>
                 </div>
             </div>
-            <div class="btn-group">
-                <button type="button" class="btn dropdown-toggle secundary" data-toggle="dropdown" aria-expanded="false">Appareil</button>
+            <div class="btn-group rounded appareil">
+                <button type="button" class="btn rounded dropdown-toggle text-white secundary" data-toggle="dropdown" aria-expanded="false">Appareil</button>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="#">Action</a>
                   <a class="dropdown-item" href="#">Another action</a>
                   <a class="dropdown-item" href="#">Something else here</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Separated link</a>
                 </div>
             </div>
-            <div class="btn-group">
-                <button type="button" class="btn dropdown-toggle tertiary" data-toggle="dropdown" aria-expanded="false">Ustensiles</button>
+            <div class="btn-group rounded ustensiles">
+                <button type="button" class="btn rounded dropdown-toggle text-white tertiary" data-toggle="dropdown" aria-expanded="false">Ustensiles</button>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="#">Action</a>
                   <a class="dropdown-item" href="#">Another action</a>
                   <a class="dropdown-item" href="#">Something else here</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Separated link</a>
                 </div>
             </div>
         </div>
@@ -61,47 +60,133 @@
 
     <main class="container d-flex flex-wrap">
         <div class="card rounded">
-            <img src="assets/logo.png" class="card-img-top" alt="">
+            <div class="imgContainer">
+                <img src="assets/cocoLimonade.png" class="card-img-top" alt="">
+            </div>
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <header class="row d-flex justify-content-between">
+                <h5 class="card-title">Limonade de Coco</h5>
+                <div class="font-weight-bold"><span class="far fa-clock"></span>10 min</div>
+              </header>
+              <div class="row">
+                  <div class="col col-left">
+                      <ul class="list-unstyled">
+                          <li>Lait de coco: 400ml</li>
+                          <li>Jus de citron: 2</li>
+                          <li>Crène de coco: 4 cuillères</li>
+                          <li>Sucre: 20g</li>
+                          <li>Glaçons:2</li>
+                      </ul>
+                  </div>
+                  <div class="col col-right">
+                      <p>Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée</p>
+                  </div>
+              </div>
             </div>
         </div>
         <div class="card rounded">
-            <img src="assets/logo.png" class="card-img-top" alt="">
+            <div class="imgContainer">
+                <img src="assets/cocoLimonade.png" class="card-img-top" alt="">
+            </div>
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <header class="row d-flex justify-content-between">
+                <h5 class="card-title">Limonade de Coco</h5>
+                <div class="font-weight-bold"><span class="far fa-clock"></span>10 min</div>
+              </header>
+              <div class="row">
+                  <div class="col col-left">
+                      <ul class="list-unstyled">
+                          <li>Lait de coco: 400ml</li>
+                          <li>Jus de citron: 2</li>
+                          <li>Crène de coco: 4 cuillères</li>
+                          <li>Sucre: 20g</li>
+                          <li>Glaçons:2</li>
+                      </ul>
+                  </div>
+                  <div class="col col-right">
+                      <p>Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée</p>
+                  </div>
+              </div>
             </div>
         </div>
         <div class="card rounded">
-            <img src="assets/logo.png" class="card-img-top" alt="">
+            <div class="imgContainer">
+                <img src="assets/cocoLimonade.png" class="card-img-top" alt="">
+            </div>
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <header class="row d-flex justify-content-between">
+                <h5 class="card-title">Limonade de Coco</h5>
+                <div class="font-weight-bold"><span class="far fa-clock"></span>10 min</div>
+              </header>
+              <div class="row">
+                  <div class="col col-left">
+                      <ul class="list-unstyled">
+                          <li>Lait de coco: 400ml</li>
+                          <li>Jus de citron: 2</li>
+                          <li>Crène de coco: 4 cuillères</li>
+                          <li>Sucre: 20g</li>
+                          <li>Glaçons:2</li>
+                      </ul>
+                  </div>
+                  <div class="col col-right">
+                      <p>Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée</p>
+                  </div>
+              </div>
             </div>
         </div>
         <div class="card rounded">
-            <img src="assets/logo.png" class="card-img-top" alt="">
+            <div class="imgContainer">
+                <img src="assets/cocoLimonade.png" class="card-img-top" alt="">
+            </div>
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <header class="row d-flex justify-content-between">
+                <h5 class="card-title">Limonade de Coco</h5>
+                <div class="font-weight-bold"><span class="far fa-clock"></span>10 min</div>
+              </header>
+              <div class="row">
+                  <div class="col col-left">
+                      <ul class="list-unstyled">
+                          <li>Lait de coco: 400ml</li>
+                          <li>Jus de citron: 2</li>
+                          <li>Crène de coco: 4 cuillères</li>
+                          <li>Sucre: 20g</li>
+                          <li>Glaçons:2</li>
+                      </ul>
+                  </div>
+                  <div class="col col-right">
+                      <p>Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée</p>
+                  </div>
+              </div>
             </div>
         </div>
         <div class="card rounded">
-            <img src="assets/logo.png" class="card-img-top" alt="">
+            <div class="imgContainer">
+                <img src="assets/cocoLimonade.png" class="card-img-top" alt="">
+            </div>
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <header class="row d-flex justify-content-between">
+                <h5 class="card-title">Limonade de Coco</h5>
+                <div class="font-weight-bold"><span class="far fa-clock"></span>10 min</div>
+              </header>
+              <div class="row">
+                  <div class="col col-left">
+                      <ul class="list-unstyled">
+                          <li>Lait de coco: 400ml</li>
+                          <li>Jus de citron: 2</li>
+                          <li>Crène de coco: 4 cuillères</li>
+                          <li>Sucre: 20g</li>
+                          <li>Glaçons:2</li>
+                      </ul>
+                  </div>
+                  <div class="col col-right">
+                      <p>Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée</p>
+                  </div>
+              </div>
             </div>
         </div>
-    </main>
 
+
+        
     <!-- Bootstrap scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

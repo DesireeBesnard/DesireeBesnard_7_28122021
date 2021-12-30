@@ -1,4 +1,86 @@
+.container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.row {
+    margin: 0;
+}
+
+header {
+    padding-top: 40px;
+}
+
+.logo {
+    width: 268px;
+    margin-bottom: 20px;
+}
+
+.search {
+    background-color: #E7E7E7;
+    font-size: 18px;
+    height: 50px;
+}
+
+.search-btn {
+    right: 0;
+}
+
+.dropdown-menu .dropdown-item {
+    color: white;
+}
+
+.ingredients, .appareil, .ustensiles {
+    margin: 20px 20px 20px 0;
+}
+
+.ingredients, .ingredients .dropdown-menu {
+    background-color: #3282F7;
+}
+
+.appareil, .appareil .dropdown-menu {
+    background-color: #68D9A4;
+    ;
+}
+
+.ustensiles, .ustensiles .dropdown-menu {
+    background-color: #ED6454;
+}
+
 .card {
     width: 350px;
     height: auto;
+    margin: 0 30px 30px 0;
+}
+
+.card .imgContainer {
+    height: 178px;
+    width: auto;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-body {
+    background-color: #E7E7E7;
+}
+
+.card header {
+    padding-top: 0;
+    font-size: 18px;
+}
+
+.card .col {
+    font-size: 12px;
+}
+
+.col-left {
+    padding-left: 0;
+}
+
+.col-right{
+    padding-right: 0;
 }
