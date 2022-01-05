@@ -2,8 +2,8 @@ const toDelete = {
     "articles": ['a', 'au', 'aux', 'avec', 'dans', 'de', 'des', 'du', 'en', 'et', 'la', 'le', 'les', 'par', 'pour', 'sans', 'sous', 'sur', 'un', 'une '],
     "apostrophe": ["c'", "d'", "j'", "l'", "m'", "n'", "t'"]
 }
-const results = []
-const input = "tarte à l'oursin d'eau et lait de coco sur Crème brûlée"
+let results = []
+const input = "Poisson au gruyère la coco et au citron"
 
 // Remove all irrelevant words
 
@@ -30,39 +30,30 @@ Object.entries(toDelete).forEach((array) => {
     }
 })
 
-console.log(input)
-console.log(searchValue)
-
 
 // Linear search implementation
-// const linearSearch = (array, value) => {
-//     // for (let item of array) {
-//     //     if (item.includes(value)) {
-//     //         results.push(item)
-//     //     }
-//     // }
 
-//     const results = recipes.filter((recipe) => {
-//         return (
-//             recipe.ingredients
-//         )
-//     })
+const testFunction = (value) => {
 
-//     console.log(`J'ai ${results.length} résultats`)
-//     console.log(results)
-//     return results
-// }
+    results = recipes.filter( (recipe) => {
+        
+        return (
+            recipe.ingredients.some( item => {
+                item.ingredient.toLowerCase().includes(value)
+            })  || 
+            recipe.description.toLowerCase().includes(value) || 
+            recipe.ustensils.some( item => {
+                item.toLowerCase().includes(value)
+            })
+        )
+    })
 
-// console.log(recipes.ingredients)
-recipes.filter( recipe => {
-    return (
-        recipe.ingredients.some( item => {
-            item.ingredient.toLowerCase().includes("coco")
-        })  || 
-        recipe.description.toLowerCase().includes("coco") || 
-        recipe.ustensils.some( item => {
-            item.toLowerCase().includes("coco")
-        })
-    )
-})
+    return results
+}
+
+console.log(input)
+console.log(searchValue)
+console.log(searchValue.map(value => testFunction(value)))
+
+
 
