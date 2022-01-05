@@ -35,13 +35,34 @@ console.log(searchValue)
 
 
 // Linear search implementation
-const linearSearch = (array, value) => {
-    for (let item of array) {
-        if (item.includes(value)) {
-            results.push(item)
-        }
-    }
-    console.log(`J'ai ${results.length} résultats`)
-    console.log(results)
-    return results
-}
+// const linearSearch = (array, value) => {
+//     // for (let item of array) {
+//     //     if (item.includes(value)) {
+//     //         results.push(item)
+//     //     }
+//     // }
+
+//     const results = recipes.filter((recipe) => {
+//         return (
+//             recipe.ingredients
+//         )
+//     })
+
+//     console.log(`J'ai ${results.length} résultats`)
+//     console.log(results)
+//     return results
+// }
+
+// console.log(recipes.ingredients)
+recipes.filter( recipe => {
+    return (
+        recipe.ingredients.some( item => {
+            item.ingredient.toLowerCase().includes("coco")
+        })  || 
+        recipe.description.toLowerCase().includes("coco") || 
+        recipe.ustensils.some( item => {
+            item.toLowerCase().includes("coco")
+        })
+    )
+})
+
