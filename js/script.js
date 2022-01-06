@@ -1,25 +1,28 @@
-const toDelete = {
+const input = "Poisson à l'oignon, la coco , et au citron"
+const searchValue = input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ')
+console.log(searchValue)
+
+const toDelete = Object.entries({
     "articles": ['a', 'au', 'aux', 'avec', 'dans', 'de', 'des', 'du', 'en', 'et', 'la', 'le', 'les', 'par', 'pour', 'sans', 'sous', 'sur', 'un', 'une '],
-    "apostrophe": ["c'", "d'", "j'", "l'", "m'", "n'", "t'"]
-}
+    "apostrophe": ["c'", "d'", "j'", "l'", "m'", "n'", "t'"],
+    "punctuation": [",", ";", ":"]
+})
+
 let results = []
-const input = "Poisson au gruyère la coco et au citron"
+
 
 // Remove all irrelevant words
-
-const searchValue = input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ')
-
-Object.entries(toDelete).forEach((array) => {
+toDelete.forEach((array) => {
 
     if (array[0] === "articles") {
         array[1].forEach((wToDelete) => {
             searchValue.forEach( word => {
-                if (word.includes(wToDelete) && (word === wToDelete)) {
+                if ((word === wToDelete)) {
                     searchValue.splice(searchValue.indexOf(word), 1) 
                 }
             })
         })
-    } else {
+    } else if (array[0] === "apostrophe") {
         array[1].forEach((wToDelete) => {
             searchValue.forEach( word => {
                 if (word.includes(wToDelete)) {
@@ -27,15 +30,27 @@ Object.entries(toDelete).forEach((array) => {
                 }
             })
         }) 
+    } else {
+        array[1].forEach((wToDelete) => {
+            searchValue.forEach( word => {
+                if (word === wToDelete) {
+                    searchValue.splice(searchValue.indexOf(word), 1) 
+                } else {
+                    searchValue[searchValue.indexOf(word)] = word.replace(`${wToDelete}`, '')
+                }
+            })
+        })
     }
 })
 
+console.log(`Mots à rechercher`, searchValue)
+
+
 
 // Linear search implementation
+const findResults = (value) => {
 
-const testFunction = (value) => {
-
-    results = recipes.filter( (recipe) => {
+    let result = recipes.filter( recipe => {
         
         return (
             recipe.ingredients.some( item => {
@@ -48,12 +63,14 @@ const testFunction = (value) => {
         )
     })
 
-    return results
+    return result
 }
 
-console.log(input)
-console.log(searchValue)
-console.log(searchValue.map(value => testFunction(value)))
+const primeResults = searchValue.map(value => {
+    let result = findResults(value)
+    return result
+})
 
+results = primeResults.flat()
 
-
+console.log(results)
