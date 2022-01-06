@@ -1,4 +1,4 @@
-const input = "Poisson à l'oignon, la coco , et au citron"
+const input = ""
 const searchValue = input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ')
 console.log(searchValue)
 
@@ -71,6 +71,7 @@ const primeResults = searchValue.map(value => {
     return result
 })
 
-results = primeResults.flat()
+// flat array and remove duplicates recipes
+results = [...new Set(primeResults.flat())]
 
 console.log(results)
