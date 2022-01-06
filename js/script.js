@@ -1,4 +1,4 @@
-const input = ""
+const input = "coco l'"
 const searchValue = input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ')
 console.log(searchValue)
 
@@ -9,7 +9,6 @@ const toDelete = Object.entries({
 })
 
 let results = []
-
 
 // Remove all irrelevant words
 toDelete.forEach((array) => {
@@ -25,9 +24,11 @@ toDelete.forEach((array) => {
     } else if (array[0] === "apostrophe") {
         array[1].forEach((wToDelete) => {
             searchValue.forEach( word => {
-                if (word.includes(wToDelete)) {
+                if (word === wToDelete) {
+                    searchValue.splice(searchValue.indexOf(word), 1) 
+                } else if (word.includes(wToDelete)) {
                     searchValue[searchValue.indexOf(word)] = word.replace(`${wToDelete}`, '')
-                }
+                } 
             })
         }) 
     } else {
@@ -44,7 +45,6 @@ toDelete.forEach((array) => {
 })
 
 console.log(`Mots à rechercher`, searchValue)
-
 
 
 // Linear search implementation
@@ -66,12 +66,12 @@ const findResults = (value) => {
     return result
 }
 
-const primeResults = searchValue.map(value => {
+const tmpResults = searchValue.map(value => {
     let result = findResults(value)
     return result
 })
 
 // flat array and remove duplicates recipes
-results = [...new Set(primeResults.flat())]
+results = [...new Set(tmpResults.flat())]
 
 console.log(results)
