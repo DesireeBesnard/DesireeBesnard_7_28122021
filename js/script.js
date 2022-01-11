@@ -10,6 +10,9 @@ const toDelete = Object.entries({
 
 let results = []
 
+
+
+
 // Remove all irrelevant words
 toDelete.forEach((array) => {
 
@@ -43,7 +46,6 @@ toDelete.forEach((array) => {
         })
     }
 })
-
 console.log(`Mots à rechercher`, searchValue)
 
 
@@ -73,5 +75,4 @@ const tmpResults = searchValue.map(value => {
 
 // flat array and remove duplicates recipes
 results = [...new Set(tmpResults.flat())]
-
 console.log(results)
