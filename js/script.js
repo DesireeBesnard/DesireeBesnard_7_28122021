@@ -55,13 +55,11 @@ const findResults = (value) => {
     let result = recipes.filter( recipe => {
         
         return (
+            recipe.name.toLowerCase().includes(value) ||
             recipe.ingredients.some( item => {
                 item.ingredient.toLowerCase().includes(value)
             })  || 
-            recipe.description.toLowerCase().includes(value) || 
-            recipe.ustensils.some( item => {
-                item.toLowerCase().includes(value)
-            })
+            recipe.description.toLowerCase().includes(value)
         )
     })
 
