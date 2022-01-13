@@ -1,6 +1,7 @@
-const input = "Délice de citron à l'oignon au, gruyère et dés de lait de coco c'est lourd d'des"
+// const input = "Délice de citron à l'oignon au, gruyère et dés de lait de coco c'est lourd d'des"
+const input = "coco"
 const searchValue = input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ')
-console.log(searchValue)
+// console.log(searchValue)
 
 const toDelete = Object.entries({
     "apostrophe": ["c'", "d'", "j'", "l'", "m'", "n'", "t'"],
@@ -13,7 +14,7 @@ let results = []
 
 const inArray = (array, word) => {
     for (let i = 0; i < array.length; i++) {
-        const searchWord = array[i];
+        const searchWord = array[i]
         if (searchWord === word) {
             return true
         } 
@@ -106,10 +107,42 @@ for (let index = 0; index < toDelete.length; index++) {
     } 
 }
 
+const findResults = (value) => {
+    for (const recipe of recipes) {
+
+        const regex = new RegExp(value)
+
+        for (let i = 0; i < recipe.ingredients.length; i++) {
+            const ingredient = recipe.ingredients[i].ingredient.toLowerCase()
+
+            if ( (regex.test(ingredient) === true) && (inArray(results, recipe) === false)) {
+                results[results.length] = recipe
+            }
+        }
+
+        if ( (regex.test(recipe.description.toLowerCase()) === true) && (inArray(results, recipe) === false)) {
+            results[results.length] = recipe
+        }
+
+        for (let i = 0; i < recipe.ustensils.length; i++) {
+            const ustensil = recipe.ustensils[i].toLowerCase()
+
+            if ( (regex.test(ustensil.toLowerCase()) === true) && (inArray(results, recipe) === false) ) {
+                results[results.length] = recipe
+            }
+        }
+    }
+}
+
 console.log(wToSearch)
 
+for (let i = 0; i < wToSearch.length; i++) {
+    const word = wToSearch[i]
 
+    findResults(word)
+}
 
+console.log(results)
 
 
 
