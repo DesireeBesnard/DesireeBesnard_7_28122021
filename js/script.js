@@ -1,3 +1,123 @@
+const input = "Délice de citron à l'oignon au, gruyère et dés de lait de coco c'est lourd d'des"
+const searchValue = input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ')
+console.log(searchValue)
+
+const toDelete = Object.entries({
+    "apostrophe": ["c'", "d'", "j'", "l'", "m'", "n'", "t'"],
+    "punctuation": [",", ";", ":"],
+    "articles": ['a', 'au', 'aux', 'avec', 'dans', 'de', 'des', 'du', 'en', 'et', 'est', 'la', 'le', 'les', 'par', 'pour', 'sans', 'sous', 'sur', 'un', 'une']
+})
+let wToSearch = []
+
+let results = []
+
+const inArray = (array, word) => {
+    for (let i = 0; i < array.length; i++) {
+        const searchWord = array[i];
+        if (searchWord === word) {
+            return true
+        } 
+    }
+    return false
+}
+
+const gotApostrophe = word => {
+    for (let i = 0; i < toDelete[0][1].length; i++) {
+        const apostrophe = toDelete[0][1][i];
+        const regex = new RegExp(apostrophe);
+        if (regex.test(word) === true) {
+            console.log("gotApostrophe === true")
+            return true
+        }
+    }
+    console.log("gotApostrophe === false")
+    return false
+}
+
+const gotPunct = word => {
+    for (let i = 0; i < toDelete[1][1].length; i++) {
+        const wToDelete = toDelete[1][1][i];
+        if (inArray(word, wToDelete) === true) {
+            return true
+        }  
+    }
+    return false
+}
+
+// Remove all irrelevant words
+for (let index = 0; index < toDelete.length; index++) {
+    let category = toDelete[index]
+    let items = category[1]
+
+    if (category[0] === "apostrophe") {
+        for (let i = 0; i < items.length; i++) {
+            const wToDelete = items[i]
+
+            for (let j = 0; j < searchValue.length; j++) {
+                let word = searchValue[j]
+
+                if (inArray(word, "'") === true) {
+                    for (let i = 0; i < toDelete[0][1].length; i++) {
+
+                        const toModify = new RegExp(wToDelete)
+
+                        if (toModify.test(word) === true) {
+                            const modifWord = word.replace(wToDelete, "")
+                            searchValue[j] = modifWord
+                        }
+                    }
+                }
+            }
+
+        }
+    } else if (category[0] === "punctuation") {
+        for (let i = 0; i < items.length; i++) {
+            const wToDelete = items[i]
+
+            for (let j = 0; j < searchValue.length; j++) {
+                let word = searchValue[j]
+
+                if (gotPunct(word) === true) {
+                    for (let i = 0; i < toDelete[1][1].length; i++) {
+
+                        const toModify = new RegExp(wToDelete)
+
+                        if (toModify.test(word) === true) {
+                            const modifWord = word.replace(wToDelete, "")
+
+                            searchValue[j] = modifWord
+                        }
+                    }
+                }
+            }
+        }
+    } else if (category[0] === "articles") {
+        for (let i = 0; i < items.length; i++) {
+            const wToDelete = items[i]
+            
+            for (let j = 0; j < searchValue.length; j++) {
+                let word = searchValue[j]
+          
+                if ((inArray(toDelete[2][1], word) === false) && (inArray(wToSearch, word) === false) ) {
+                    wToSearch[wToSearch.length] = word
+                }
+            }
+        }
+    } 
+}
+
+console.log(wToSearch)
+
+
+
+
+
+
+
+
+
+
+
 // Need to sort the array before searching
 // sort algorithms
 const testArray = ["sonnaille", "nature", "lait", "trémie", "magasin", "glycocolle", "lait de vache", "somnambule", "cocotte", "sierra", "torpille", "verser", "ronger", "cocotier", "genou", "douze", "mouette", "stop", "entrepôt", "coco", "antiacide", "tapisserie", "lait de coco", "terrasses" , "astronome", "commissaire", "cocon", "poker"]
