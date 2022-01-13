@@ -27,11 +27,9 @@ const gotApostrophe = word => {
         const apostrophe = toDelete[0][1][i];
         const regex = new RegExp(apostrophe);
         if (regex.test(word) === true) {
-            console.log("gotApostrophe === true")
             return true
         }
     }
-    console.log("gotApostrophe === false")
     return false
 }
 
@@ -124,17 +122,12 @@ const findResults = (value) => {
             results[results.length] = recipe
         }
 
-        for (let i = 0; i < recipe.ustensils.length; i++) {
-            const ustensil = recipe.ustensils[i].toLowerCase()
-
-            if ( (regex.test(ustensil.toLowerCase()) === true) && (inArray(results, recipe) === false) ) {
-                results[results.length] = recipe
-            }
+        if ( (regex.test(recipe.name.toLowerCase()) === true) && (inArray(results, recipe) === false) ) {
+            results[results.length] = recipe
         }
+
     }
 }
-
-console.log(wToSearch)
 
 for (let i = 0; i < wToSearch.length; i++) {
     const word = wToSearch[i]
