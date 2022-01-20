@@ -1,3 +1,7 @@
+.d-none {
+    display: none!important;
+}
+
 .container {
     padding-left: 0;
     padding-right: 0;
@@ -24,6 +28,50 @@ header {
 
 .search-btn {
     right: 0;
+}
+
+.selector p {
+    margin: 0;
+}
+
+.select {
+    width: 100%;
+}
+
+.select span {
+    pointer-events: none;
+}
+
+#listIngredients, #listUstensils, #listAppliances {
+    margin: 0;
+    padding: 0;
+}
+
+#option-list {
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border-radius: 0 0 5px 5px;
+    position: absolute;
+    top: 53px;
+    z-index: 1;
+    background-color: var(--primary);
+}
+
+.options {
+    width: 100%;
+    padding: 15px 20px;
+    list-style: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-size: 18px;
+    position: relative;
+}
+
+.options a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .dropdown-menu .dropdown-item {

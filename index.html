@@ -30,29 +30,38 @@
             <button class="btn border-0 position-absolute h-100 search-btn" type="submit"><span class="fas fa-search"></span></button>
         </div>
         <div class="row">
-            <div class="btn-group rounded ingredients">
-                <button type="button" class="btn rounded dropdown-toggle text-white primary" data-toggle="dropdown" aria-expanded="false">Ingrédients</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+            <div class="selector">
+                <button class="select selectIngredient">
+                  <span >Ingrédients</span>
+                  <span class="fas fa-chevron-down dropdown"></span>
+                </button>
+                <ul id="listIngredients" class="d-none" >
+                  <li class="options"><a href="#" class="options-text">Popularité</a></li>
+                  <li class="options"><a href="#" class="options-text">Date</a></li>
+                  <li class="options"><a href="#" class="options-text">Titre</a></li>
+                </ul>
             </div>
-            <div class="btn-group rounded appareil">
-                <button type="button" class="btn rounded dropdown-toggle text-white secundary" data-toggle="dropdown" aria-expanded="false">Appareil</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+            <div class="selector">
+                <button class="select selectUstensil">
+                  <span>Appareils</span>
+                  <span class="fas fa-chevron-down dropdown"></span>
+                </button>
+                <ul id="listUstensils" class="d-none" >
+                  <li class="options"><a href="#" class="options-text">Popularité</a></li>
+                  <li class="options"><a href="#" class="options-text">Date</a></li>
+                  <li class="options"><a href="#" class="options-text">Titre</a></li>
+                </ul>
             </div>
-            <div class="btn-group rounded ustensiles">
-                <button type="button" class="btn rounded dropdown-toggle text-white tertiary" data-toggle="dropdown" aria-expanded="false">Ustensiles</button>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+            <div class="selector">
+                <button class="select selectAppliance">
+                  <span>Ustensiles</span>
+                  <span class="fas fa-chevron-down dropdown"></span>
+                </button>
+                <ul id="listAppliances" class="d-none" >
+                  <li class="options"><a href="#" class="options-text">Popularité</a></li>
+                  <li class="options"><a href="#" class="options-text">Date</a></li>
+                  <li class="options"><a href="#" class="options-text">Titre</a></li>
+                </ul>
             </div>
         </div>
 

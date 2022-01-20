@@ -5,37 +5,6 @@ let tagIngredients = []
 let tagAppliances = []
 let tagUstensils = []
 
-// sort algorithm
-// const quickSort = (array) => {
-    
-//     const pivot = array[array.length -1]
-//     const leftArr = []
-//     const rightArr = []
-
-//     if (array.length === 1) {
-//         return array
-//     }
-
-//     for (let i = 0; i < array.length - 1; i++) {
-//         if (array[i] < pivot) {
-//             leftArr.push(array[i])
-//         } else {
-//             rightArr.push(array[i])
-//         }
-//     }
-
-//     if (leftArr.length > 0 && rightArr.length > 0) {
-//         // return [...quickSort(leftArr), ...[pivot], ...quickSort(rightArr)]
-//         return quickSort(leftArr).concat([pivot]).concat(quickSort(rightArr))
-//     } else if (leftArr.length > 0) {
-//         // return [...quickSort(leftArr), ...[pivot]]
-//         return quickSort(leftArr).concat([pivot])
-//     } else {
-//         // return [...[pivot], ...quickSort(rightArr)]
-//         return [pivot].concat(quickSort(rightArr))
-//     }
-// }
-
 const quickSort = array => {
     if (array.length <= 1) {
         return array
@@ -247,6 +216,46 @@ const mainSearch = searchValue => {
 }
 
 mainSearch(searchValue)
-    // availableIngredients()
-    // availableUstensils()
-    // availableAppliances()
+// availableIngredients()
+// availableUstensils()
+// availableAppliances()
+
+const selectIngredient = document.querySelector(".selectIngredient")
+const dropDownIngredient = document.querySelector(".selectIngredient .dropdown")
+const listIngredients = document.querySelector("#listIngredients")
+const selectUstensil = document.querySelector(".selectUstensil")
+const dropDownUstensils = document.querySelector(".selectUstensil .dropdown")
+const listUstensils = document.querySelector("#listUstensils")
+const selectAppliance = document.querySelector(".selectAppliance")
+const dropDownAppliances = document.querySelector(".selectAppliance .dropdown")
+const listAppliances = document.querySelector("#listAppliances")
+
+const options = document.querySelectorAll(".options a")
+const optionsText = document.querySelector(".options-text")
+
+document.addEventListener("click", e => {
+
+    if (e.target === selectIngredient) {
+        listIngredients.classList.toggle("d-none")
+        if (listIngredients.className === "d-none") {
+            dropDownIngredient.style.transform = "rotate(0deg)"
+        } else {
+            dropDownIngredient.style.transform = "rotate(180deg)"
+        }
+
+    } else if (e.target === selectUstensil) {
+        listUstensils.classList.toggle("d-none")
+        if (listUstensils.className === "d-none") {
+            dropDownUstensils.style.transform = "rotate(0deg)"
+        } else {
+            dropDownUstensils.style.transform = "rotate(180deg)"
+        }
+    } else if (e.target === selectAppliance) {
+        listAppliances.classList.toggle("d-none")
+        if (listAppliances.className === "d-none") {
+            dropDownAppliances.style.transform = "rotate(0deg)"
+        } else {
+            dropDownAppliances.style.transform = "rotate(180deg)"
+        }
+    }
+})
