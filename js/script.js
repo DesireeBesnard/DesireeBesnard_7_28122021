@@ -1,9 +1,19 @@
-const input = "coco"
-const searchValue = input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ')
+const searchInput = document.querySelector(".search")
+const searchButton = document.querySelector(".search-btn")
 let results = []
+const recipesContainer = document.querySelector(".recipes-container")
 let tagIngredients = []
 let tagAppliances = []
 let tagUstensils = []
+const selectIngredient = document.querySelector(".selectIngredient")
+const dropDownIngredient = document.querySelector(".selectIngredient .dropdown")
+const listIngredients = document.querySelector("#listIngredients")
+const selectUstensil = document.querySelector(".selectUstensil")
+const dropDownUstensils = document.querySelector(".selectUstensil .dropdown")
+const listUstensils = document.querySelector("#listUstensils")
+const selectAppliance = document.querySelector(".selectAppliance")
+const dropDownAppliances = document.querySelector(".selectAppliance .dropdown")
+const listAppliances = document.querySelector("#listAppliances")
 
 const quickSort = array => {
     if (array.length <= 1) {
@@ -25,7 +35,6 @@ const quickSort = array => {
     return [...quickSort(leftArr) ,pivot,...quickSort(rightArr)]
 }
 
-
 const availableIngredients = () => {
     let array
     if (results.length === 0) {
@@ -45,6 +54,13 @@ const availableIngredients = () => {
     })
     ingredients = quickSort(ingredients)
     console.log(ingredients)
+    listIngredients.innerHTML = ""
+
+    for (let i = 0; i < ingredients.length; i++) {
+        const ingredient = ingredients[i]
+        const Template = new availableTags(ingredient)
+        listIngredients.appendChild(Template.displayAvailableTag())
+    }
 }
 
 const availableUstensils = () => {
@@ -66,6 +82,13 @@ const availableUstensils = () => {
     })
     ustensils = quickSort(ustensils)
     console.log(ustensils)
+    listUstensils.innerHTML = ""
+
+    for (let i = 0; i < ustensils.length; i++) {
+        const ustensil = ustensils[i]
+        const Template = new availableTags(ustensil)
+        listUstensils.appendChild(Template.displayAvailableTag())
+    }
 }
 
 const availableAppliances = () => {
@@ -85,6 +108,13 @@ const availableAppliances = () => {
     })
     appliances = quickSort(appliances)
     console.log(appliances)
+    listAppliances.innerHTML = ""
+
+    for (let i = 0; i < appliances.length; i++) {
+        const appliance = appliances[i]
+        const Template = new availableTags(appliance)
+        listAppliances.appendChild(Template.displayAvailableTag())
+    }
 }
 
 const mainSearch = searchValue => {
@@ -181,6 +211,7 @@ const mainSearch = searchValue => {
 
     // Linear search implementation
     const findResults = (value) => {
+        results.length = 0
         for (const recipe of recipes) {
     
             const regex = new RegExp(value)
@@ -209,29 +240,32 @@ const mainSearch = searchValue => {
         findResults(word)
     }
 
-    console.log(results)
+    if (results.length !== 0) {
+        console.log(results)
+        recipesContainer.innerHTML = ""
+        for (let i = 0; i < results.length; i++) {
+            const recipe = results[i]
+            const Template = new recipeCard(recipe)
+            recipesContainer.appendChild(
+                Template.createRecipeCard()
+            )
+        }
+    } else {
+        console.log("Aucun résultat")
+        recipesContainer.innerHTML = "Aucun résultat"
+    }
     availableIngredients()
     availableUstensils()
     availableAppliances()
 }
 
-mainSearch(searchValue)
-// availableIngredients()
-// availableUstensils()
-// availableAppliances()
 
-const selectIngredient = document.querySelector(".selectIngredient")
-const dropDownIngredient = document.querySelector(".selectIngredient .dropdown")
-const listIngredients = document.querySelector("#listIngredients")
-const selectUstensil = document.querySelector(".selectUstensil")
-const dropDownUstensils = document.querySelector(".selectUstensil .dropdown")
-const listUstensils = document.querySelector("#listUstensils")
-const selectAppliance = document.querySelector(".selectAppliance")
-const dropDownAppliances = document.querySelector(".selectAppliance .dropdown")
-const listAppliances = document.querySelector("#listAppliances")
-
-const options = document.querySelectorAll(".options a")
-const optionsText = document.querySelector(".options-text")
+searchInput.addEventListener("search", () => {
+    if (searchInput.value.length > 2) {
+        const searchValue = searchInput.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ')
+        mainSearch(searchValue)
+    }
+})
 
 document.addEventListener("click", e => {
 
