@@ -25,35 +25,36 @@ const quickSort = array => {
 
     for(let i=0; i < array.length-1;i++){
         if(array[i] < pivot){
-        leftArr.push(array[i])
+            leftArr[leftArr.length] = array[i]
         }
         else{
-        rightArr.push(array[i])
+            rightArr[rightArr.length] = array[i]
         }
     }
 
-    return [...quickSort(leftArr) ,pivot,...quickSort(rightArr)]
+    return [...quickSort(leftArr), pivot,...quickSort(rightArr)]
 }
 
 const availableIngredients = () => {
+    console.log("blabla")
     let array
-    if (results.length === 0) {
+    if ( (searchInput.value.length === 0)) {
         array = recipes
     } else {
         array = results
     }
+    console.log(array)
 
     let ingredients = []
     array.forEach(recipe => {
         recipe.ingredients.forEach( item => {
             const ingredient = item.ingredient.toLowerCase()
             if (! ingredients.includes(ingredient)) {
-                ingredients.push(ingredient)
+                ingredients[ingredients.length] = ingredient
             }
         })
     })
     ingredients = quickSort(ingredients)
-    console.log(ingredients)
     listIngredients.innerHTML = ""
 
     for (let i = 0; i < ingredients.length; i++) {
@@ -65,7 +66,7 @@ const availableIngredients = () => {
 
 const availableUstensils = () => {
     let array
-    if (results.length === 0) {
+    if ((results.length === 0) || (searchInput.value.length === 0)) {
         array = recipes
     } else {
         array = results
@@ -76,12 +77,11 @@ const availableUstensils = () => {
         recipe.ustensils.forEach( item => {
             const ustensil = item.toLowerCase() 
             if (! ustensils.includes(ustensil)) {
-                ustensils.push(ustensil) 
+                ustensils[ustensils.length] = ustensil
             }
         })
     })
     ustensils = quickSort(ustensils)
-    console.log(ustensils)
     listUstensils.innerHTML = ""
 
     for (let i = 0; i < ustensils.length; i++) {
@@ -93,7 +93,7 @@ const availableUstensils = () => {
 
 const availableAppliances = () => {
     let array
-    if (results.length === 0) {
+    if ((results.length === 0) || (searchInput.value.length === 0)) {
         array = recipes
     } else {
         array = results
@@ -103,11 +103,10 @@ const availableAppliances = () => {
     array.forEach( recipe => {
         const appliance = recipe.appliance.toLowerCase()
         if (! appliances.includes(appliance)) {
-            appliances.push(appliance)
+            appliances[appliances.length] = appliance
         }
     })
     appliances = quickSort(appliances)
-    console.log(appliances)
     listAppliances.innerHTML = ""
 
     for (let i = 0; i < appliances.length; i++) {
@@ -254,11 +253,14 @@ const mainSearch = searchValue => {
         console.log("Aucun résultat")
         recipesContainer.innerHTML = "Aucun résultat"
     }
-    availableIngredients()
-    availableUstensils()
-    availableAppliances()
 }
 
+
+searchInput.addEventListener("input", () => {
+    if (searchInput.value.length === 0) {
+        recipesContainer.innerHTML = ""
+    }
+})
 
 searchInput.addEventListener("search", () => {
     if (searchInput.value.length > 2) {
@@ -274,6 +276,7 @@ document.addEventListener("click", e => {
         if (listIngredients.className === "d-none") {
             dropDownIngredient.style.transform = "rotate(0deg)"
         } else {
+            availableIngredients()
             dropDownIngredient.style.transform = "rotate(180deg)"
         }
 
@@ -282,6 +285,7 @@ document.addEventListener("click", e => {
         if (listUstensils.className === "d-none") {
             dropDownUstensils.style.transform = "rotate(0deg)"
         } else {
+            availableUstensils()
             dropDownUstensils.style.transform = "rotate(180deg)"
         }
     } else if (e.target === selectAppliance) {
@@ -289,6 +293,7 @@ document.addEventListener("click", e => {
         if (listAppliances.className === "d-none") {
             dropDownAppliances.style.transform = "rotate(0deg)"
         } else {
+            availableAppliances()
             dropDownAppliances.style.transform = "rotate(180deg)"
         }
     }
