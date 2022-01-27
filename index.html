@@ -29,6 +29,11 @@
                 placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" aria-label="Search">
             <button class="btn border-0 position-absolute h-100 search-btn" type="submit" disabled><span class="fas fa-search"></span></button>
         </div>
+        <div>
+            <div class="selected_ingredients"></div>
+            <div class="selected-ustensils"></div>
+            <div class="selected-appliances"></div>
+        </div>
         <div class="row">
             <div class="selector">
                 <button class="select selectIngredient">
@@ -39,14 +44,14 @@
             </div>
             <div class="selector">
                 <button class="select selectUstensil">
-                  <span>Appareils</span>
+                  <span>Ustensiles</span>
                   <span class="fas fa-chevron-down dropdown"></span>
                 </button>
                 <ul id="listUstensils" class="d-none" ></ul>
             </div>
             <div class="selector">
                 <button class="select selectAppliance">
-                  <span>Ustensiles</span>
+                  <span>Appareils</span>
                   <span class="fas fa-chevron-down dropdown"></span>
                 </button>
                 <ul id="listAppliances" class="d-none" ></ul>
@@ -70,6 +75,7 @@
     <script src="js/recipes.js"></script>
     <script src="js/recipeCard.js"></script>
     <script src="js/availableTags.js"></script>
+    <script src="js/selectedTags.js"></script>
     <script src="js/script.js"></script>
 </body>
 
