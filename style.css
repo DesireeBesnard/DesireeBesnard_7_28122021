@@ -30,21 +30,124 @@ header {
     right: 0;
 }
 
-.selector p {
-    margin: 0;
+.fas .fa-search {
+    pointer-events: none;
+}
+
+.selected-ingredient, .selected-ustensil, .selected-appliance {
+    border-radius: 5px;
+}
+
+.selected-ingredient {
+    color:white;
+    background-color:#3282F7;
+    padding: 5px 10px;
+}
+
+.selected-ustensil {
+    color: white;
+    background-color: #68D9A4;
+    padding: 5px 10px;
+}
+
+.selected-appliance {
+    color: white;
+    background-color: #ED6454;
+    padding: 5px 10px;
+}
+
+.fa-times-circle:before {
+    content: "";
+}
+
+.fa-times-circle:after {
+    content: "\f057";
+    margin-left: 5px;
+}
+
+.selectors {
+    position: absolute;
+    z-index: 1;
+}
+
+input[type="search"] {
+    border: none;
+    outline: none;
+    box-shadow:none 
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
+
+.selector {
+    position: relative;
+    max-height: 900px;
+}
+
+#ingredientsInput, #listIngredients{
+    background-color: #3282F7;
+    color: white;
+}
+
+#ingredientsInput::placeholder {
+    color: white
+}
+
+#ustensilsInput, #listUstensils{
+    background-color: #68D9A4;
+    color: white
+}
+
+#ustensilsInput::placeholder {
+    color: white
+}
+
+#appliancesInput, #listAppliances{
+    background-color: #ED6454;
+    color: white;
+}
+
+#appliancesInput::placeholder {
+    color: white
 }
 
 .select {
-    width: 100%;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    color: white;
 }
 
 .select span {
     pointer-events: none;
 }
 
+#ingredientsInput, #ustensilsInput, #appliancesInput {
+    border-radius: 5px;
+    padding: 10px 0 10px 10px;
+}
+
+#ingredientsInput:focus, #ustensilsInput:focus, #appliancesInput:focus {
+    border: none;
+}
+
 #listIngredients, #listUstensils, #listAppliances {
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 0 0 5px 5px;
+    max-width: 715px;
+}
+
+#listIngredients .options:last-child, #listUstensils .options:last-child, #listAppliances .options:last-child {
+    padding-bottom: 10px;
 }
 
 #option-list {
@@ -60,13 +163,13 @@ header {
 }
 
 .options {
-    width: 100%;
-    padding: 15px 20px;
+    padding: 5px 0 0 20px;
     list-style: none;
     cursor: pointer;
     box-sizing: border-box;
-    font-size: 18px;
+    font-size: 14px;
     position: relative;
+    width: 238px;
 }
 
 .options a {
@@ -93,6 +196,10 @@ header {
 
 .ustensiles, .ustensiles .dropdown-menu {
     background-color: #ED6454;
+}
+
+.recipes-container {
+    margin-top: 110px;
 }
 
 .card {

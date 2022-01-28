@@ -1,18 +1,25 @@
 const searchInput = document.querySelector(".search")
-const searchButton = document.querySelector(".search-btn")
-const recipesContainer = document.querySelector(".recipes-container")
+const searchButton = document.querySelector(".fas .fa-search")
+
 const selectedIngredients = document.querySelector(".selected_ingredients")
-const selectedUstensils = document.querySelector(".selected-ustensils")
-const selectedAppliances = document.querySelector(".selected-appliances")
+const ingredientsInput = document.querySelector("#ingredientsInput")
 const selectIngredient = document.querySelector(".selectIngredient")
 const dropDownIngredient = document.querySelector(".selectIngredient .dropdown")
 const listIngredients = document.querySelector("#listIngredients")
+
+const selectedUstensils = document.querySelector(".selected-ustensils")
+const ustensilsInput = document.querySelector("#ustensilsInput")
 const selectUstensil = document.querySelector(".selectUstensil")
 const dropDownUstensils = document.querySelector(".selectUstensil .dropdown")
 const listUstensils = document.querySelector("#listUstensils")
+
+const selectedAppliances = document.querySelector(".selected-appliances")
+const appliancesInput = document.querySelector("#appliancesInput")
 const selectAppliance = document.querySelector(".selectAppliance")
 const dropDownAppliances = document.querySelector(".selectAppliance .dropdown")
 const listAppliances = document.querySelector("#listAppliances")
+
+const recipesContainer = document.querySelector(".recipes-container")
 
 let results = []
 let ingredients = []
@@ -54,8 +61,11 @@ const quickSort = array => {
 }
 
 const availableIngredients = () => {
+
+    const regex = new RegExp(ingredientsInput.value)
+
     let array
-    if ((results.length === 0) && (searchInput.value.length === 0)) {
+    if ((results.length === 0) || (searchInput.value.length === 0)) {
         array = recipes
     } else {
         array = results
@@ -71,18 +81,25 @@ const availableIngredients = () => {
         })
     })
     ingredients = quickSort(ingredients)
+
+
     listIngredients.innerHTML = ""
 
     for (let i = 0; i < ingredients.length; i++) {
         const ingredient = ingredients[i]
-        const Template = new availableTags(ingredient)
-        listIngredients.appendChild(Template.displayAvailableIngredient())
+
+        if (regex.test(ingredient) === true) {
+            const Template = new availableTags(ingredient)
+            listIngredients.appendChild(Template.displayAvailableIngredient())
+        }
     }
 }
 
 const availableUstensils = () => {
+    const regex = new RegExp(ustensilsInput.value)
+
     let array
-    if ((results.length === 0) && (searchInput.value.length === 0)) {
+    if ((results.length === 0) || (searchInput.value.length === 0)) {
         array = recipes
     } else {
         array = results
@@ -97,16 +114,23 @@ const availableUstensils = () => {
         })
     })
     ustensils = quickSort(ustensils)
+
+
     listUstensils.innerHTML = ""
 
     for (let i = 0; i < ustensils.length; i++) {
         const ustensil = ustensils[i]
-        const Template = new availableTags(ustensil)
-        listUstensils.appendChild(Template.displayAvailableUstensil())
+
+        if (regex.test(ustensil) === true) {
+            const Template = new availableTags(ustensil)
+            listUstensils.appendChild(Template.displayAvailableUstensil())
+        }
     }
 }
 
 const availableAppliances = () => {
+    const regex = new RegExp(appliancesInput.value)
+
     let array
     if ((results.length === 0) || (searchInput.value.length === 0)) {
         array = recipes
@@ -123,12 +147,17 @@ const availableAppliances = () => {
         })
     })
     appliances = quickSort(appliances)
+
+
     listAppliances.innerHTML = ""
 
     for (let i = 0; i < appliances.length; i++) {
         const appliance = appliances[i]
-        const Template = new availableTags(appliance)
-        listAppliances.appendChild(Template.displayAvailableAppliances())
+
+        if (regex.test(appliance) === true ) {
+            const Template = new availableTags(appliance)
+            listAppliances.appendChild(Template.displayAvailableAppliances())
+        }
     }
 }
 
@@ -276,7 +305,6 @@ const searchByTag = () => {
 
     recipesContainer.innerHTML = ""
     const newResults = []
-    const allTrue = true
 
     for (const recipe of array) {
 
@@ -290,7 +318,6 @@ const searchByTag = () => {
             const ingredient = recipe.ingredients[i].ingredient
             recipeIngredients[recipeIngredients.length] = ingredient
         }
-        // console.log(recipeIngredients)
 
         for (let i = 0; i < tagIngredients.length; i++) {
             const tagIngredient = tagIngredients[i]
@@ -322,7 +349,7 @@ const searchByTag = () => {
     
     if (newResults.length === 0) {
 
-        if ((tagIngredients.length !== 0) || (tagUstensils.length !== 0) || (tagAppliance.length !== 0)) {
+        if ((tagIngredients.length !== 0) || (tagUstensils.length !== 0) || (tagAppliances.length !== 0)) {
             recipesContainer.innerHTML = "Aucun résultat"
         } else {
             for (let i = 0; i < results.length; i++) {
@@ -365,7 +392,21 @@ for (let i = 0; i < recipes.length; i++) {
 
 searchInput.addEventListener("input", () => {
     if (searchInput.value.length === 0) {
-        recipesContainer.innerHTML = ""
+        if ((selectedIngredients.innerHTML === "") && (selectedUstensils.innerHTML === "") && (selectedAppliances.innerHTML === "")) {
+            results = []
+            recipesContainer.innerHTML = ""
+            availableIngredients()
+            availableUstensils()
+            availableAppliances()
+        } else if ((selectedIngredients.innerHTML !== "") || (selectedUstensils.innerHTML !== "") || (selectedAppliances.innerHTML !== "")) {
+            console.log("J'ai encore un tag")
+            results = []
+            recipesContainer.innerHTML = ""
+            searchByTag()
+            availableIngredients()
+            availableUstensils()
+            availableAppliances()
+        }
     }
 })
 
@@ -376,19 +417,43 @@ searchInput.addEventListener("search", () => {
     }
 })
 
+ingredientsInput.addEventListener("input", () => {
+    availableIngredients()
+})
+
+ustensilsInput.addEventListener("input", () => {
+    availableUstensils()
+})
+
+appliancesInput.addEventListener("input", () => {
+    availableAppliances()
+})
+
 document.addEventListener("click", e => {
+
+    if (e.target.className === "fas fa-search") {
+        if (searchInput.value.length > 2) {
+            const searchValue = searchInput.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ')
+            mainSearch(searchValue)
+        }
+    }
 
     if (e.target === selectIngredient) {
         listIngredients.classList.toggle("d-none")
         if (listIngredients.className === "d-none") {
             dropDownIngredient.style.transform = "rotate(0deg)"
+            ingredientsInput.placeholder = "Ingrédient"
+            ingredientsInput.style.borderRadius = "5px"
         } else {
-            availableIngredients()
             dropDownIngredient.style.transform = "rotate(180deg)"
+            ingredientsInput.placeholder = "Rechercher un ingrédient"
+            ingredientsInput.style.borderRadius = "5px 5px 0 0"
         }
+        availableIngredients()
 
     } else if (e.target.getAttribute("category") === "ingredient") {
         selectedIngredients.innerHTML = ""
+        ingredientsInput.value = "" 
 
         if (inArray(tagIngredients, e.target.innerHTML) === false) {
             tagIngredients[tagIngredients.length] = e.target.innerHTML
@@ -396,13 +461,14 @@ document.addEventListener("click", e => {
             for (let i = 0; i < tagIngredients.length; i++) {
                 const tagIngredient = tagIngredients[i]
                 const selectedIngredient = new SelectedTags(tagIngredient).displaySelectedTag()
-                selectedIngredient.classList.add("selected-ingredient")
+                selectedIngredient.classList.add("selected-ingredient","far","fa-times-circle", "mr-3")
                 selectedIngredients.appendChild(selectedIngredient)
             }
         }
         searchByTag()
 
-    } else if (e.target.className === "selected-ingredient") {
+    } else if (e.target.classList.contains("selected-ingredient")) {
+
         selectedIngredients.innerHTML = ""
         const newTagIngredients = []
         for (let i = 0; i < tagIngredients.length; i++) {
@@ -415,20 +481,29 @@ document.addEventListener("click", e => {
         for (let i = 0; i < tagIngredients.length; i++) {
             const tagIngredient = tagIngredients[i]
             const selectedIngredient = new SelectedTags(tagIngredient).displaySelectedTag()
-            selectedIngredient.classList.add("selected-ingredient")
+            selectedIngredient.classList.add("selected-ingredient","far","fa-times-circle", "mr-3")
             selectedIngredients.appendChild(selectedIngredient)
         }
         searchByTag()
         availableIngredients()
 
+        if (searchInput.value.length === 0) {
+            if ((selectedIngredients.innerHTML === "") && (selectedUstensils.innerHTML === "") && (selectedAppliances.innerHTML === "")) {
+                recipesContainer.innerHTML = ""
+            }
+        }
 
     } else if (e.target === selectUstensil) {
         listUstensils.classList.toggle("d-none")
         if (listUstensils.className === "d-none") {
             dropDownUstensils.style.transform = "rotate(0deg)"
+            ustensilsInput.placeholder = "Ustensils"
+            ustensilsInput.style.borderRadius = "5px"
         } else {
             availableUstensils()
             dropDownUstensils.style.transform = "rotate(180deg)"
+            ustensilsInput.placeholder = "Rechercher un ustensil"
+            ustensilsInput.style.borderRadius = "5px 5px 0 0"
         }
 
     }  else if (e.target.getAttribute("category") === "ustensil") {
@@ -440,13 +515,13 @@ document.addEventListener("click", e => {
             for (let i = 0; i < tagUstensils.length; i++) {
                 const tagUstensil = tagUstensils[i]
                 const selectedUstensil = new SelectedTags(tagUstensil).displaySelectedTag()
-                selectedUstensil.classList.add("selected-ustensil")
+                selectedUstensil.classList.add("selected-ustensil","far","fa-times-circle", "mr-3")
                 selectedUstensils.appendChild(selectedUstensil)
             }
         }
         searchByTag()
 
-    } else if (e.target.className === "selected-ustensil") {
+    } else if (e.target.classList.contains("selected-ustensil")) {
         selectedUstensils.innerHTML = ""
         const newTagUstensils = []
         for (let i = 0; i < tagUstensils.length; i++) {
@@ -456,24 +531,32 @@ document.addEventListener("click", e => {
             }
         }
         tagUstensils = newTagUstensils
-        console.log(tagUstensils)
         for (let i = 0; i < tagUstensils.length; i++) {
             const tagUstensil = tagUstensils[i]
             const selectedUstensil = new SelectedTags(tagUstensil).displaySelectedTag()
-            selectedUstensil.classList.add("selected-ustensil")
+            selectedUstensil.classList.add("selected-ustensil","far","fa-times-circle", "mr-3")
             selectedUstensils.appendChild(selectedUstensil)
         }
         searchByTag()
         availableUstensils()
 
+        if (searchInput.value.length === 0) {
+            if ((selectedIngredients.innerHTML === "") && (selectedUstensils.innerHTML === "") && (selectedAppliances.innerHTML === "")) {
+                recipesContainer.innerHTML = ""
+            }
+        }
 
     } else if (e.target === selectAppliance) {
         listAppliances.classList.toggle("d-none")
         if (listAppliances.className === "d-none") {
             dropDownAppliances.style.transform = "rotate(0deg)"
+            appliancesInput.placeholder = "Appareils"
+            appliancesInput.style.borderRadius = "5px"
         } else {
             availableAppliances()
             dropDownAppliances.style.transform = "rotate(180deg)"
+            appliancesInput.placeholder = "Rechercher un appareil"
+            appliancesInput.style.borderRadius = "5px 5px 0 0"
         }
 
     } else if (e.target.getAttribute("category") === "appliance") {
@@ -485,14 +568,14 @@ document.addEventListener("click", e => {
             for (let i = 0; i < tagAppliances.length; i++) {
                 const tagAppliance = tagAppliances[i]
                 const selectedAppliance = new SelectedTags(tagAppliance).displaySelectedTag()
-                selectedAppliance.classList.add("selected-appliance")
+                selectedAppliance.classList.add("selected-appliance","far","fa-times-circle", "mr-3")
                 selectedAppliances.appendChild(selectedAppliance)
                 
             }
         }
         searchByTag()
 
-    } else if (e.target.className === "selected-appliance") {
+    } else if (e.target.classList.contains("selected-appliance")) {
         selectedAppliances.innerHTML = ""
         const newTagAppliances = []
         for (let i = 0; i < tagAppliances.length; i++) {
@@ -505,10 +588,16 @@ document.addEventListener("click", e => {
         for (let i = 0; i < tagAppliances.length; i++) {
             const tagAppliance = tagAppliances[i]
             const selectedAppliance = new SelectedTags(tagAppliance).displaySelectedTag()
-            selectedAppliance.classList.add("selected-appliance")
+            selectedAppliance.classList.add("selected-appliance","far","fa-times-circle", "mr-3")
             selectedAppliances.appendChild(selectedAppliance)
         }
         searchByTag()
         availableAppliances()
+
+        if (searchInput.value.length === 0) {
+            if ((selectedIngredients.innerHTML === "") && (selectedUstensils.innerHTML === "") && (selectedAppliances.innerHTML === "")) {
+                recipesContainer.innerHTML = ""
+            }
+        }
     }
 })

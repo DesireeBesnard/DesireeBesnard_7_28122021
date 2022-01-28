@@ -24,38 +24,38 @@
         <div class="d-flex justify-content-center">
             <img class="logo" src="assets/logo.png" alt="company logo">
         </div>
-        <div class="row d-flex w-100 position-relative">
+        <div class="row d-flex w-100 position-relative mb-4">
             <input class="form-control text-dark search" type="search"
                 placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette" aria-label="Search">
             <button class="btn border-0 position-absolute h-100 search-btn" type="submit" disabled><span class="fas fa-search"></span></button>
         </div>
-        <div>
+        <div class="d-flex">
             <div class="selected_ingredients"></div>
             <div class="selected-ustensils"></div>
             <div class="selected-appliances"></div>
         </div>
-        <div class="row">
-            <div class="selector">
-                <button class="select selectIngredient">
-                  <span >Ingrédients</span>
-                  <span class="fas fa-chevron-down dropdown"></span>
-                </button>
-                <ul id="listIngredients" class="d-none" ></ul>
-            </div>
-            <div class="selector">
-                <button class="select selectUstensil">
-                  <span>Ustensiles</span>
-                  <span class="fas fa-chevron-down dropdown"></span>
-                </button>
-                <ul id="listUstensils" class="d-none" ></ul>
-            </div>
-            <div class="selector">
-                <button class="select selectAppliance">
-                  <span>Appareils</span>
-                  <span class="fas fa-chevron-down dropdown"></span>
-                </button>
-                <ul id="listAppliances" class="d-none" ></ul>
-            </div>
+        <div class="row text-white mt-3 mb-5 selectors">
+                <div class="selector mr-3">
+                    <input type="search" id="ingredientsInput" placeholder="Ingredients" class="w-100">
+                    <button class="select selectIngredient">
+                      <span class="fas fa-chevron-down dropdown"></span>
+                    </button>
+                    <ul id="listIngredients" class="d-none" ></ul>
+                </div>
+                <div class="selector mr-3">
+                    <input type="search" id="ustensilsInput" placeholder="Ustensiles" class="w-100">
+                    <button class="select selectUstensil">
+                      <span class="fas fa-chevron-down dropdown"></span>
+                    </button>
+                    <ul id="listUstensils" class="d-none" ></ul>
+                </div>
+                <div class="selector">
+                    <input type="search" id="appliancesInput" placeholder="Appareils" class="w-100">
+                    <button class="select selectAppliance">
+                      <span class="fas fa-chevron-down dropdown"></span>
+                    </button>
+                    <ul id="listAppliances" class="d-none" ></ul>
+                </div>
         </div>
 
     </header>
@@ -63,6 +63,10 @@
     <main class="container d-flex flex-wrap recipes-container">
 
     </main>
+
+    <span></span>
+
+
         
     <!-- Bootstrap scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
