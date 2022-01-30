@@ -228,6 +228,17 @@ input[type="search"]::-webkit-search-results-decoration {
     font-size: 18px;
 }
 
+.card-title {
+    font-size: 18px;
+    max-width: 200px;
+}
+
+/* .description {
+    max-height: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+} */
+
 .card .col {
     font-size: 12px;
 }
@@ -238,4 +249,10 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .col-right{
     padding-right: 0;
+}
+
+.col-right p {
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
