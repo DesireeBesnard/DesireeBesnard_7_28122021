@@ -30,6 +30,27 @@ let tagUstensils = []
 let tagAppliances = []
 
 
+// put every field needed in lowercase
+for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i]
+
+    recipe.name = recipe.name.toLowerCase()
+    for (let i = 0; i < recipe.ingredients.length; i++) {
+        recipe.ingredients[i].ingredient = recipe.ingredients[i].ingredient.toLowerCase()
+    }
+    recipe.description = recipe.description.toLowerCase()
+    for (let i = 0; i < recipe.ustensils.length; i++) {
+        recipe.ustensils[i] = recipe.ustensils[i].toLowerCase()
+    }
+    for (let i = 0; i < recipe.appliance.length; i++) {
+        recipe.appliance[i] = recipe.appliance[i].toLowerCase()
+    }
+}
+
+
+// helper functions 
+
+// check if an item is in the array 
 const inArray = (array, word) => {
     for (let i = 0; i < array.length; i++) {
         const searchWord = array[i]
@@ -40,6 +61,7 @@ const inArray = (array, word) => {
     return false
 }
 
+// sort available tags 
 const quickSort = array => {
     if (array.length <= 1) {
         return array
@@ -60,6 +82,7 @@ const quickSort = array => {
     return [...quickSort(leftArr), pivot,...quickSort(rightArr)]
 }
 
+// available tags 
 const availableIngredients = () => {
 
     const regex = new RegExp(ingredientsInput.value)
@@ -98,6 +121,7 @@ const availableIngredients = () => {
     }
 }
 
+// available tags 
 const availableUstensils = () => {
     const regex = new RegExp(ustensilsInput.value)
 
@@ -134,6 +158,7 @@ const availableUstensils = () => {
     }
 }
 
+// display available tags 
 const availableAppliances = () => {
     const regex = new RegExp(appliancesInput.value)
 
@@ -170,10 +195,24 @@ const availableAppliances = () => {
         }
     }
 }
+// helper functions end
 
+
+// main functions
+
+// displays recipes resulting from the main search 
 const mainSearch = searchValue => {
 
+    // reset arrays and html 
+    tagIngredients = []
+    tagUstensils = []
+    tagAppliances = []
+    selectedIngredients.innerHTML = ""
+    selectedUstensils.innerHTML = ""
+    selectedAppliances.innerHTML = ""
     let wToSearch = []
+
+
     const toDelete = Object.entries({
         "apostrophe": ["c'", "d'", "j'", "l'", "m'", "n'", "t'"],
         "punctuation": [",", ";", ":"],
@@ -189,8 +228,8 @@ const mainSearch = searchValue => {
         }
         return false
     }
-    
-    // Remove all irrelevant words
+
+    // Remove all irrelevant words or apostrophe
     for (let index = 0; index < toDelete.length; index++) {
         let category = toDelete[index]
         let items = category[1]
@@ -252,14 +291,8 @@ const mainSearch = searchValue => {
         } 
     }
 
-    tagIngredients = []
-    tagUstensils = []
-    tagAppliances = []
-    selectedIngredients.innerHTML = ""
-    selectedUstensils.innerHTML = ""
-    selectedAppliances.innerHTML = ""
 
-    // Linear search implementation
+    // Linear search algorithm implementation
     const findResults = (value) => {
         results.length = 0
         for (const recipe of recipes) {
@@ -284,9 +317,9 @@ const mainSearch = searchValue => {
         }
     }
     
+    // iterate over each search word
     for (let i = 0; i < wToSearch.length; i++) {
         const word = wToSearch[i]
-    
         findResults(word)
     }
 
@@ -300,12 +333,17 @@ const mainSearch = searchValue => {
             )
         }
     } else {
-        recipesContainer.innerHTML = "Aucun résultat"
+        recipesContainer.innerHTML = "Aucune recette ne correspond à votre critère…"
     }
 }
 
+
 const searchByTag = () => {
 
+    recipesContainer.innerHTML = ""
+    const newResults = []
+
+    // if a main search has been done before iterate on the results otherwise on recipes array
     let array
     if ((results.length === 0) && (searchInput.value.length === 0)) {
         array = recipes
@@ -313,16 +351,12 @@ const searchByTag = () => {
         array = results
     }
 
-    recipesContainer.innerHTML = ""
-    const newResults = []
-
     for (const recipe of array) {
 
         let gotAllIngredients = true
         let gotAllUstensils = true
         let gotAllAppliances = true
 
-        // si pour tous les ingredients inArray = true
         const recipeIngredients = []
         for (let i = 0; i < recipe.ingredients.length; i++) {
             const ingredient = recipe.ingredients[i].ingredient
@@ -360,15 +394,7 @@ const searchByTag = () => {
     if (newResults.length === 0) {
 
         if ((tagIngredients.length !== 0) || (tagUstensils.length !== 0) || (tagAppliances.length !== 0)) {
-            recipesContainer.innerHTML = "Aucun résultat"
-        } else {
-            for (let i = 0; i < results.length; i++) {
-                const recipe = results[i]
-                const Template = new recipeCard(recipe)
-                recipesContainer.appendChild(
-                    Template.createRecipeCard()
-                )
-            }
+            recipesContainer.innerHTML = "Aucune recette ne correspond à votre critère…"
         }
     } else {
         for (let i = 0; i < newResults.length; i++) {
@@ -380,25 +406,10 @@ const searchByTag = () => {
         }
     }
 }
+// main functions end
 
 
-
-for (let i = 0; i < recipes.length; i++) {
-    const recipe = recipes[i]
-
-    recipe.name = recipe.name.toLowerCase()
-    for (let i = 0; i < recipe.ingredients.length; i++) {
-        recipe.ingredients[i].ingredient = recipe.ingredients[i].ingredient.toLowerCase()
-    }
-    recipe.description = recipe.description.toLowerCase()
-    for (let i = 0; i < recipe.ustensils.length; i++) {
-        recipe.ustensils[i] = recipe.ustensils[i].toLowerCase()
-    }
-    for (let i = 0; i < recipe.appliance.length; i++) {
-        recipe.appliance[i] = recipe.appliance[i].toLowerCase()
-    }
-}
-
+// event handlers 
 
 searchInput.addEventListener("input", () => {
     if (searchInput.value.length === 0) {
@@ -409,13 +420,17 @@ searchInput.addEventListener("input", () => {
             availableUstensils()
             availableAppliances()
         } else if ((selectedIngredients.innerHTML !== "") || (selectedUstensils.innerHTML !== "") || (selectedAppliances.innerHTML !== "")) {
-            console.log("J'ai encore un tag")
             results = []
             recipesContainer.innerHTML = ""
             searchByTag()
             availableIngredients()
             availableUstensils()
             availableAppliances()
+        }
+    } else {
+        if (searchInput.value.length > 2) {
+            const searchValue = searchInput.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ')
+            mainSearch(searchValue)
         }
     }
 })
@@ -441,6 +456,7 @@ appliancesInput.addEventListener("input", () => {
 
 document.addEventListener("click", e => {
 
+    // if click on the a magnifying glass's input field 
     if (e.target.className === "fas fa-search") {
         if (searchInput.value.length > 2) {
             const searchValue = searchInput.value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ')
@@ -479,6 +495,12 @@ document.addEventListener("click", e => {
 
     } else if (e.target.classList.contains("selected-ingredient")) {
 
+        if (searchInput.value.length === 0) {
+            if ((selectedIngredients.innerHTML === "") && (selectedUstensils.innerHTML === "") && (selectedAppliances.innerHTML === "")) {
+                recipesContainer.innerHTML = ""
+            }
+        }
+
         selectedIngredients.innerHTML = ""
         const newTagIngredients = []
         for (let i = 0; i < tagIngredients.length; i++) {
@@ -497,11 +519,6 @@ document.addEventListener("click", e => {
         searchByTag()
         availableIngredients()
 
-        if (searchInput.value.length === 0) {
-            if ((selectedIngredients.innerHTML === "") && (selectedUstensils.innerHTML === "") && (selectedAppliances.innerHTML === "")) {
-                recipesContainer.innerHTML = ""
-            }
-        }
 
     } else if (e.target === selectUstensil) {
         listUstensils.classList.toggle("d-none")

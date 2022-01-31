@@ -9,9 +9,20 @@ class recipeCard {
         const list = document.createElement("ul")
         list.classList.add("list-unstyled", "recipe-ingredients")
         for (let i = 0; i < this._recipe.ingredients.length; i++) {
+
             const ingredient = this._recipe.ingredients[i].ingredient
+            const quantity = this._recipe.ingredients[i].quantity
+            const unit = this._recipe.ingredients[i].unit
             const node = document.createElement("li")
-            node.innerHTML = ingredient
+
+            if ((quantity !== undefined) && (unit !== undefined)) {
+                node.innerHTML = `<span class="font-weight-bold">${ingredient}</span>: ${quantity} ${unit}`
+            } else if ( (quantity !== undefined) && (unit === undefined)) {
+                node.innerHTML = `<span class="font-weight-bold">${ingredient}</span>: ${quantity}`
+            } else {
+                node.innerHTML = `<span class="font-weight-bold">${ingredient}</span>`
+            }
+            
             list.appendChild(node)
         }
 
