@@ -51,7 +51,6 @@ class recipeCard {
             </div>
         `
 
-
         $wrapper.innerHTML = template
         $wrapper.appendChild(cardBody)
         return $wrapper

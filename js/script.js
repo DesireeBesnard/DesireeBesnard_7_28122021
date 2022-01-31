@@ -72,14 +72,17 @@ const availableIngredients = () => {
     }
 
     ingredients = []
-    array.forEach(recipe => {
-        recipe.ingredients.forEach( item => {
-            const ingredient = item.ingredient
-            if ((!ingredients.includes(ingredient)) && (inArray(tagIngredients, ingredient) === false)) {
+
+    for (let i = 0; i < array.length; i++) {
+        const recipe = array[i]
+
+        for (let i = 0; i < recipe.ingredients.length; i++) {
+            const ingredient = recipe.ingredients[i].ingredient
+            if ((inArray(ingredients, ingredient) === false) && (inArray(tagIngredients, ingredient) === false)) {
                 ingredients[ingredients.length] = ingredient
-            }
-        })
-    })
+            }  
+        }
+    }
     ingredients = quickSort(ingredients)
 
 
@@ -106,13 +109,16 @@ const availableUstensils = () => {
     }
 
     ustensils = []
-    array.forEach( recipe => {
-        recipe.ustensils.forEach( ustensil => {
-            if ((! ustensils.includes(ustensil)) && (inArray(tagUstensils, ustensil) === false)) {
+
+    for (let i = 0; i < array.length; i++) {
+        const recipe = array[i]
+        for (let i = 0; i < recipe.ustensils.length; i++) {
+            const ustensil = recipe.ustensils[i]
+            if ((inArray(ustensils, ustensil) === false) && (inArray(tagUstensils, ustensil) === false)) {
                 ustensils[ustensils.length] = ustensil
             }
-        })
-    })
+        } 
+    }
     ustensils = quickSort(ustensils)
 
 
@@ -139,13 +145,17 @@ const availableAppliances = () => {
     }
 
     appliances = []
-    array.forEach( recipe => {
-        recipe.appliance.forEach( appliance => {
-            if ((! appliances.includes(appliance)) && (inArray(tagAppliances, appliance) === false)) {
+
+    for (let i = 0; i < array.length; i++) {
+        const recipe = array[i];
+
+        for (let i = 0; i < recipe.appliance.length; i++) {
+            const appliance = recipe.appliance[i]
+            if ((inArray(appliances, appliance) === false) && (inArray(tagAppliances, appliance) === false)) {
                 appliances[appliances.length] = appliance
             }
-        })
-    })
+        }  
+    }
     appliances = quickSort(appliances)
 
 

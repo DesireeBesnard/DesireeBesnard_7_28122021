@@ -233,12 +233,6 @@ input[type="search"]::-webkit-search-results-decoration {
     max-width: 200px;
 }
 
-/* .description {
-    max-height: 150px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-} */
-
 .card .col {
     font-size: 12px;
 }
@@ -252,7 +246,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .col-right p {
-    max-height: 100px;
+    max-height: 125px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
