@@ -20,18 +20,7 @@ const mainSearch = searchValue => {
         }
         return false
     }
-    
-    const gotApostrophe = word => {
-        for (let i = 0; i < toDelete[0][1].length; i++) {
-            const apostrophe = toDelete[0][1][i];
-            const regex = new RegExp(apostrophe);
-            if (regex.test(word) === true) {
-                return true
-            }
-        }
-        return false
-    }
-    
+
     const gotPunct = word => {
         for (let i = 0; i < toDelete[1][1].length; i++) {
             const wToDelete = toDelete[1][1][i];
