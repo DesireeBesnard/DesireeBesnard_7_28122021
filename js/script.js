@@ -278,7 +278,6 @@ const mainSearch = searchValue => {
             }
         } else if (category[0] === "articles") {
             for (let i = 0; i < items.length; i++) {
-                const wToDelete = items[i]
                 
                 for (let j = 0; j < searchValue.length; j++) {
                     let word = searchValue[j]
