@@ -28,6 +28,7 @@ header {
 
 .search-btn {
     right: 0;
+    color: black;
 }
 
 .fas .fa-search {
@@ -36,6 +37,7 @@ header {
 
 .selected-ingredient, .selected-ustensil, .selected-appliance {
     border-radius: 5px;
+    margin-bottom: 5px;
 }
 
 .selected-ingredient {
@@ -249,4 +251,39 @@ input[type="search"]::-webkit-search-results-decoration {
     max-height: 125px;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) { 
+
+    .container {
+        padding: 40px 15px 0 15px;
+    }
+
+    .selectors {
+        padding: 15px;
+        justify-content: center;
+    }
+
+    #listIngredients, #listUstensils, #listAppliances {
+        max-width: 220px;
+    }
+
+    .recipes-container {
+        justify-content: center;
+    }
+
+    .card {
+        margin: 0 0 30px 0;
+    }
+ }
+
+ @media (max-width: 575.98px) {
+
+    .selector {
+        margin-right: 0!important;
+    }
+
+     .recipes-container {
+        margin-top: 220px;
+    }
 }
