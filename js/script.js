@@ -43,7 +43,6 @@ const mainSearch = searchValue => {
             })
         }
     })
-    // console.log(`Mots à rechercher`, searchValue)
 
     // Linear search implementation
     const findResults = (value) => {
