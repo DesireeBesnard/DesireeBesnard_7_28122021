@@ -1,6 +1,8 @@
+const recipesContainer = document.querySelector(".recipes-container")
+
 const input = "coco"
-const searchValue = input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ')
 let results = []
+const searchValue = input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ')
 
 const mainSearch = searchValue => {
 
@@ -69,6 +71,18 @@ const mainSearch = searchValue => {
     // flat array and remove duplicates recipes
     results = [...new Set(searchResults.flat())]
     console.log(results)
+
+    if (results.length !== 0) {
+        recipesContainer.innerHTML = ""
+        results.forEach( recipe => {
+            const Template = new recipeCard(recipe)
+            recipesContainer.appendChild(
+                Template.createRecipeCard()
+            )
+        })
+    } else {
+        recipesContainer.innerHTML = "Aucune recette ne correspond à votre critère…"
+    }
 }
 
 mainSearch(searchValue)
