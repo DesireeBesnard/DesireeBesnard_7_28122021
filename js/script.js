@@ -1,10 +1,12 @@
+const recipesContainer = document.querySelector(".recipes-container")
+
 const input = "coco"
+let results = []
 const searchValue = input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ')
 
 const mainSearch = searchValue => {
 
     let wToSearch = []
-    let results = []
     const toDelete = Object.entries({
         "apostrophe": ["c'", "d'", "j'", "l'", "m'", "n'", "t'"],
         "punctuation": [",", ";", ":"],
@@ -123,6 +125,19 @@ const mainSearch = searchValue => {
     }
 
     console.log(results)
+
+    if (results.length !== 0) {
+        recipesContainer.innerHTML = ""
+        for (let i = 0; i < results.length; i++) {
+            const recipe = results[i]
+            const Template = new recipeCard(recipe)
+            recipesContainer.appendChild(
+                Template.createRecipeCard()
+            )
+        }
+    } else {
+        recipesContainer.innerHTML = "Aucune recette ne correspond à votre critère…"
+    }
 }
 
 mainSearch(searchValue)
