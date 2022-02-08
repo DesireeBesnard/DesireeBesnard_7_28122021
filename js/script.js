@@ -126,18 +126,18 @@ const mainSearch = searchValue => {
 
     console.log(results);
 
-    if (results.length !== 0) {
-        recipesContainer.innerHTML = "";
-        for (let i = 0; i < results.length; i++) {
-            const recipe = results[i];
-            const Template = new recipeCard(recipe);
-            recipesContainer.appendChild(
-                Template.createRecipeCard()
-            );
-        }
-    } else {
-        recipesContainer.innerHTML = "Aucune recette ne correspond à votre critère…";
-    }
+    // if (results.length !== 0) {
+    //     recipesContainer.innerHTML = "";
+    //     for (let i = 0; i < results.length; i++) {
+    //         const recipe = results[i];
+    //         const Template = new recipeCard(recipe);
+    //         recipesContainer.appendChild(
+    //             Template.createRecipeCard()
+    //         );
+    //     }
+    // } else {
+    //     recipesContainer.innerHTML = "Aucune recette ne correspond à votre critère…";
+    // }
 };
 
 mainSearch(searchValue);
