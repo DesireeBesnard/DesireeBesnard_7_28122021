@@ -1,6 +1,6 @@
 const recipesContainer = document.querySelector(".recipes-container");
 
-const input = "tomate";
+const input = "coco";
 let results = [];
 const searchValue = input.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(' ');
 
